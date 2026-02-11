@@ -5,23 +5,35 @@ resource "azurerm_chaos_studio_experiment" "chaos_studio_experiments" {
   name                = each.value.name
   resource_group_name = each.value.resource_group_name
 
-  selectors {
-    chaos_studio_target_ids = each.value.selectors.chaos_studio_target_ids
-    name                    = each.value.selectors.name
+  dynamic "selectors" {
+    for_each = each.value.selectors
+    content {
+      chaos_studio_target_ids = selectors.value.chaos_studio_target_ids
+      name                    = selectors.value.name
+    }
   }
 
-  steps {
-    branch {
-      actions {
-        action_type   = each.value.steps.branch.actions.action_type
-        duration      = each.value.steps.branch.actions.duration
-        parameters    = each.value.steps.branch.actions.parameters
-        selector_name = each.value.steps.branch.actions.selector_name
-        urn           = each.value.steps.branch.actions.urn
+  dynamic "steps" {
+    for_each = each.value.steps
+    content {
+      dynamic "branch" {
+        for_each = steps.value.branch
+        content {
+          dynamic "actions" {
+            for_each = branch.value.actions
+            content {
+              action_type   = actions.value.action_type
+              duration      = actions.value.duration
+              parameters    = actions.value.parameters
+              selector_name = actions.value.selector_name
+              urn           = actions.value.urn
+            }
+          }
+          name = branch.value.name
+        }
       }
-      name = each.value.steps.branch.name
+      name = steps.value.name
     }
-    name = each.value.steps.name
   }
 
   dynamic "identity" {
