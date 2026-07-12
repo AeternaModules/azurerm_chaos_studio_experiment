@@ -1,29 +1,25 @@
-output "chaos_studio_experiments" {
-  description = "All chaos_studio_experiment resources"
-  value       = azurerm_chaos_studio_experiment.chaos_studio_experiments
-}
 output "chaos_studio_experiments_identity" {
-  description = "List of identity values across all chaos_studio_experiments"
-  value       = [for k, v in azurerm_chaos_studio_experiment.chaos_studio_experiments : v.identity]
+  description = "Map of identity values across all chaos_studio_experiments, keyed the same as var.chaos_studio_experiments"
+  value       = { for k, v in azurerm_chaos_studio_experiment.chaos_studio_experiments : k => v.identity }
 }
 output "chaos_studio_experiments_location" {
-  description = "List of location values across all chaos_studio_experiments"
-  value       = [for k, v in azurerm_chaos_studio_experiment.chaos_studio_experiments : v.location]
+  description = "Map of location values across all chaos_studio_experiments, keyed the same as var.chaos_studio_experiments"
+  value       = { for k, v in azurerm_chaos_studio_experiment.chaos_studio_experiments : k => v.location }
 }
 output "chaos_studio_experiments_name" {
-  description = "List of name values across all chaos_studio_experiments"
-  value       = [for k, v in azurerm_chaos_studio_experiment.chaos_studio_experiments : v.name]
+  description = "Map of name values across all chaos_studio_experiments, keyed the same as var.chaos_studio_experiments"
+  value       = { for k, v in azurerm_chaos_studio_experiment.chaos_studio_experiments : k => v.name }
 }
 output "chaos_studio_experiments_resource_group_name" {
-  description = "List of resource_group_name values across all chaos_studio_experiments"
-  value       = [for k, v in azurerm_chaos_studio_experiment.chaos_studio_experiments : v.resource_group_name]
+  description = "Map of resource_group_name values across all chaos_studio_experiments, keyed the same as var.chaos_studio_experiments"
+  value       = { for k, v in azurerm_chaos_studio_experiment.chaos_studio_experiments : k => v.resource_group_name }
 }
 output "chaos_studio_experiments_selectors" {
-  description = "List of selectors values across all chaos_studio_experiments"
-  value       = [for k, v in azurerm_chaos_studio_experiment.chaos_studio_experiments : v.selectors]
+  description = "Map of selectors values across all chaos_studio_experiments, keyed the same as var.chaos_studio_experiments"
+  value       = { for k, v in azurerm_chaos_studio_experiment.chaos_studio_experiments : k => v.selectors }
 }
 output "chaos_studio_experiments_steps" {
-  description = "List of steps values across all chaos_studio_experiments"
-  value       = [for k, v in azurerm_chaos_studio_experiment.chaos_studio_experiments : v.steps]
+  description = "Map of steps values across all chaos_studio_experiments, keyed the same as var.chaos_studio_experiments"
+  value       = { for k, v in azurerm_chaos_studio_experiment.chaos_studio_experiments : k => v.steps }
 }
 
