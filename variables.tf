@@ -77,7 +77,7 @@ EOT
   validation {
     condition = alltrue([
       for k, v in var.chaos_studio_experiments : (
-        alltrue([for item in v.steps : (length(item.actions) >= 1)])
+        alltrue([for item in v.steps : (alltrue([for item in item.branch : (length(item.actions) >= 1)]))])
       )
     ])
     error_message = "Each actions list must contain at least 1 items"
