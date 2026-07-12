@@ -1,3 +1,7 @@
+output "chaos_studio_experiments_id" {
+  description = "Map of id values across all chaos_studio_experiments, keyed the same as var.chaos_studio_experiments"
+  value       = { for k, v in azurerm_chaos_studio_experiment.chaos_studio_experiments : k => v.id }
+}
 output "chaos_studio_experiments_identity" {
   description = "Map of identity values across all chaos_studio_experiments, keyed the same as var.chaos_studio_experiments"
   value       = { for k, v in azurerm_chaos_studio_experiment.chaos_studio_experiments : k => v.identity }
