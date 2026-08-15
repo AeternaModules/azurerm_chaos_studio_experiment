@@ -4,7 +4,7 @@ output "chaos_studio_experiments_id" {
 }
 output "chaos_studio_experiments_identity" {
   description = "Map of identity values across all chaos_studio_experiments, keyed the same as var.chaos_studio_experiments"
-  value       = { for k, v in azurerm_chaos_studio_experiment.chaos_studio_experiments : k => v.identity if v.identity != null && length(v.identity) > 0 }
+  value       = { for k, v in azurerm_chaos_studio_experiment.chaos_studio_experiments : k => one(v.identity) if v.identity != null && length(v.identity) > 0 }
 }
 output "chaos_studio_experiments_location" {
   description = "Map of location values across all chaos_studio_experiments, keyed the same as var.chaos_studio_experiments"
